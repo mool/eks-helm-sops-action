@@ -1,0 +1,16 @@
+name: 'EKS Helm'
+description: 'Run Helm with EKS clusters'
+inputs:
+  args:
+    description: 'Helm arguments'
+    required: true
+  eks_cluster:
+    description: 'EKS cluster name'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.args }}
+  env:
+    CLUSTER: ${{ inputs.eks_cluster }}
