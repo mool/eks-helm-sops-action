@@ -4,6 +4,8 @@ ENV SOPS_VERSION v3.7.2
 ENV HELM_VERSION v3.8.1
 ENV HELM_SECRETS_VERSION v3.11.0
 
+ENV HELM_PLUGINS /helm/plugins
+
 RUN apt-get update && \
   apt-get install -y awscli curl git
 
@@ -12,6 +14,7 @@ RUN curl -Ss https://get.helm.sh/helm-$HELM_VERSION-linux-amd64.tar.gz -o /tmp/h
   tar -xzf /tmp/helm.tar.gz -C /tmp && \
   mv /tmp/linux-amd64/helm /usr/bin/ && \
   rm -rf /tmp/linux-amd64 && \
+  mkdir -p $HELM_PLUGINS && \
   helm plugin install https://github.com/jkroepke/helm-secrets --version $HELM_SECRETS_VERSION
 
 # Install SOPS

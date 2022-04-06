@@ -4,13 +4,12 @@ inputs:
   args:
     description: 'Helm arguments'
     required: true
-  eks_cluster:
+  eksCluster:
     description: 'EKS cluster name'
     required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.eksCluster }}
     - ${{ inputs.args }}
-  env:
-    CLUSTER: ${{ inputs.eks_cluster }}

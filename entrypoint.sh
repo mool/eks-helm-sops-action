@@ -1,5 +1,7 @@
-#!/bin/sh -l
+#!/bin/bash
 
-aws eks update-kubeconfig --name $CLUSTER --alias default
+set -x
 
-exec helm "$@"
+aws eks update-kubeconfig --name $INPUT_EKSCLUSTER --alias default
+
+helm $INPUT_ARGS
